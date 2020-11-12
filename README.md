@@ -1,61 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Quero Educação - Test Backend (Offers API)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Objetivo:
 
-## About Laravel
+O Quero Bolsa é um marketplace de bolsas de estudo, que já ajudou milhares de alunos a escolher e ingressar no curso ideal, por um preço que podem pagar. A missão do teste é criar uma API para exibição e filtragem de ofertas de curso.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Sobre a API:
+O sistema foi desenvolvido utilizando Laravel Framework 8.13, PHP 7.3, e a máquina virtual do Laravel Homestead, conforme recomendado na documentação ([https://laravel.com/docs/8.x/installation](https://laravel.com/docs/8.x/installation)).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+A API possui dois endpoints, sendo eles:
 
-## Learning Laravel
+- **[GET] - /api/courses**: responsável por listar os cursos, além de permitir filtrar pelo nome da universidade, kind, level e/ou shift.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+	Os parâmetros esperados para o filtro são:
+		-- university (string) : para filtrar pelo nome da universidade;
+		-- kind (string) : para filtrar pelo tipo de curso ( Ex: Presencial, EAD );
+		-- level (string) : para filtrar o nível do curso ( Ex: Bacharelado, Tecnólogo);
+		-- shift (string): para filtrar o período do curso ( Ex: tarde, noite);
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+	 Retorno esperado:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+       { "data": [
+            {
+                "course": {
+                    "name": "Traffic Technician",
+                    "kind": "aperiam",
+                    "level": "ullam",
+                    "shift": "autem",
+                    "university": {
+                        "name": "Mike Douglas IV University",
+                        "score": 0.21,
+                        "logo_url": "https://via.placeholder.com/640x480.png/006600?text=dolores"
+                        },
+                    "campus": {
+                        "name": "Rosemary Green Campus",
+                        "city": "North Gilesfort"
+                        }
+                    }
+            },
+            {
+                "course": {
+                    "name": "Traffic Technician",
+                    "kind": "aperiam",
+                    "level": "ullam",
+                    "shift": "autem",
+                    "university": {
+                        "name": "Mike Douglas IV University",
+                        "score": 0.21,
+                        "logo_url": "https://via.placeholder.com/640x480.png/006600?text=dolores"
+                    },
+                    "campus": {
+                        "name": "Shana Wisozk Campus",
+                        "city": "West Ignaciofort"
+                    }
+                }
+            }
+        ]}
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+- **[GET] - /api/on-sales**: responsável por listar e filtrar as ofertas dos cursos pelo nome da universidade, kind, level e/ou shift e permitir ordenar por menor e maior preço com desconto.
 
-## Contributing
+	Os parâmetros esperados para o filtro são:
+		-- university (string) : para filtrar pelo nome da universidade;
+		-- kind (string) : para filtrar pelo tipo de curso ( Ex: Presencial, EAD );
+		-- level (string) : para filtrar o nível do curso ( Ex: Bacharelado, Tecnólogo);
+		-- shift (string): para filtrar o período do curso ( Ex: tarde, noite);
+		-- order_direction: para ordenar por menor preço com desconto use  'asc' e por maior preço use 'desc'.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+	 Retorno esperado:
 
-## Code of Conduct
+      { "data": [
+            {
+                "full_price": 485.09,
+                "price_with_discount": 273.3,
+                "discount_percentage": 67.86,
+                "start_date": "11/11/2020",
+                "enrollment_semester": "culpa",
+                "enabled": false,
+                "course": {
+                    "name": "Traffic Technician",
+                    "kind": "aperiam",
+                    "level": "ullam",
+                    "shift": "autem"
+                },
+                "university": {
+                    "name": "Mike Douglas IV University",
+                    "score": 0.21,
+                    "logo_url": "https://via.placeholder.com/640x480.png/006600?text=dolores"
+                },
+                "campus": {
+                    "name": "Rosemary Green Campus",
+                    "city": "North Gilesfort"
+                }
+            },
+            {
+                "full_price": 485.09,
+                "price_with_discount": 273.3,
+                "discount_percentage": 67.86,
+                "start_date": "11/11/2020",
+                "enrollment_semester": "culpa",
+                "enabled": false,
+                "course": {
+                    "name": "Traffic Technician",
+                    "kind": "aperiam",
+                    "level": "ullam",
+                    "shift": "autem"
+                },
+                "university": {
+                    "name": "Mike Douglas IV University",
+                    "score": 0.21,
+                    "logo_url": "https://via.placeholder.com/640x480.png/006600?text=dolores"
+                },
+                "campus": {
+                    "name": "Shana Wisozk Campus",
+                    "city": "West Ignaciofort"
+                }
+            }
+        ]}
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+Foi implementado um sistema de cache nos endpoints da API baseado nas rotas e filtros utilizados na requisição.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### SetUp:
+O teste pode ser feito de duas formas, com o uso da Vagrant, ou em um Servidor Web. Para instalação e configuração da Vagrant consulte o seguinte link:  [https://laravel.com/docs/8.x/homestead](https://laravel.com/docs/8.x/homestead)
 
-## License
+Para um Servidor Web são necessários os seguintes requisitos:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- NGINX ou Apache;
+- MySql;
+- PHP 7.3 ( com as dependencias exigidas pelo Laravel Framework 8.x);
+- Composer.
+
+Depois de instalada e configurada o ambiente, acesse o diretório do projeto e execute os seguintes comandos:
+
+    composer install
+    php artisan key:generate
+    php artisan migrate:fresh --seed
+
+
+Em caso de dúvidas, estou a disposição para esclarecimentos.
