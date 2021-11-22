@@ -1,25 +1,26 @@
 # Quero Educação - Test Backend (Offers API)
 
-### Objetivo:
+### Goal:
 
-O Quero Bolsa é um marketplace de bolsas de estudo, que já ajudou milhares de alunos a escolher e ingressar no curso ideal, por um preço que podem pagar. A missão do teste é criar uma API para exibição e filtragem de ofertas de curso.
+Quero Bolsa is a scholarship marketplace, which has already analyzed students to choose and enroll in the ideal course, at a price they can afford. The test's mission is to create an API for viewing and filtering offers.
 
-### Sobre a API:
-O sistema foi desenvolvido utilizando Laravel Framework 8.13, PHP 7.3, e a máquina virtual do Laravel Homestead, conforme recomendado na documentação ([https://laravel.com/docs/8.x/installation](https://laravel.com/docs/8.x/installation)).
-
-
-A API possui dois endpoints, sendo eles:
-
-- **[GET] - /api/courses**: responsável por listar os cursos, além de permitir filtrar pelo nome da universidade, kind, level e/ou shift.
-
-	Os parâmetros esperados para o filtro são:
-		-- university (string) : para filtrar pelo nome da universidade;
-		-- kind (string) : para filtrar pelo tipo de curso ( Ex: Presencial, EAD );
-		-- level (string) : para filtrar o nível do curso ( Ex: Bacharelado, Tecnólogo);
-		-- shift (string): para filtrar o período do curso ( Ex: tarde, noite);
+### About the API:
+The system was developed using Laravel Framework 8.13, PHP 7.3, and the Laravel Homestead virtual machine, as recommended in the documentation ([https://laravel.com/docs/8.x/installation](https://laravel.com/docs/8.x/installation)).
 
 
-	 Retorno esperado:
+The API has two endpoints:
+
+- **[GET] - /api/courses**: responsible for listing the courses, in addition to allowing filtering by university name, kind, level and/or shift.
+
+    
+    The expected parameters for the filter are:
+        -- university (string) : to filter by university name;
+        -- kind (string) : to filter by the type of course ( Ex: Presential, EAD );;
+        -- level (string) : to filter the level of the course (Ex: Bachelor, Technologist);
+        -- shift (string): to filter the course period (Ex: afternoon, night);
+
+
+	 Expected return:
 
        { "data": [
             {
@@ -59,16 +60,16 @@ A API possui dois endpoints, sendo eles:
         ]}
 
 
-- **[GET] - /api/on-sales**: responsável por listar e filtrar as ofertas dos cursos pelo nome da universidade, kind, level e/ou shift e permitir ordenar por menor e maior preço com desconto.
+- **[GET] - /api/on-sales**: responsible for listing and filtering offers by university name, kind, level and/or shift and allowing ordering by lowest and highest discounted prices.
 
-	Os parâmetros esperados para o filtro são:
-		-- university (string) : para filtrar pelo nome da universidade;
-		-- kind (string) : para filtrar pelo tipo de curso ( Ex: Presencial, EAD );
-		-- level (string) : para filtrar o nível do curso ( Ex: Bacharelado, Tecnólogo);
-		-- shift (string): para filtrar o período do curso ( Ex: tarde, noite);
-		-- order_direction: para ordenar por menor preço com desconto use  'asc' e por maior preço use 'desc'.
+	The expected parameters for the filter are:
+        -- university (string) : to filter by university name;
+        -- kind (string) : to filter by the type of course (Ex: presential, EAD );
+        -- level (string) : to filter the level of the course (Ex: Bachelor, Technologist);
+        -- shift (string): to filter the course period (Ex: afternoon, night);
+        -- order_direction: to order by lowest price with discount use 'asc' and for highest price use 'desc'.
 
-	 Retorno esperado:
+	 Expected return:
 
       { "data": [
             {
@@ -120,23 +121,23 @@ A API possui dois endpoints, sendo eles:
         ]}
 
 
-Foi implementado um sistema de cache nos endpoints da API baseado nas rotas e filtros utilizados na requisição.
+A caching system was implemented in the API endpoints based on the routes and filters used in the request.
 
 ### SetUp:
-O teste pode ser feito de duas formas, com o uso da Vagrant, ou em um Servidor Web. Para instalação e configuração da Vagrant consulte o seguinte link:  [https://laravel.com/docs/8.x/homestead](https://laravel.com/docs/8.x/homestead)
+The test can be done in two ways, using Vagrant, or on a Web Server. For Vagrant installation and configuration see the following link: [https://laravel.com/docs/8.x/homestead](https://laravel.com/docs/8.x/homestead)
 
-Para um Servidor Web são necessários os seguintes requisitos:
+For a Web Server the following requirements are necessary:
 
-- NGINX ou Apache;
+- NGINX or Apache;
 - MySql;
-- PHP 7.3 ( com as dependencias exigidas pelo Laravel Framework 8.x);
+- PHP 7.3 (with dependencies required by Laravel Framework 8.x);
 - Composer.
 
-Depois de instalada e configurada o ambiente, acesse o diretório do projeto e execute os seguintes comandos:
+Once the environment is installed and configured, access the project directory and execute the following commands:
 
     composer install
     php artisan key:generate
     php artisan migrate:fresh --seed
 
 
-Em caso de dúvidas, estou a disposição para esclarecimentos.
+In case of doubts, I am available for clarification.   :)
